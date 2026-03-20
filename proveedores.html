@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Solo Dulces · Canal Mayorista & Grandes Superficies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:      #0F0A07;
+    --ink-mid:  #1E1208;
+    --rust:     #8C2B0E;
+    --rust-lt:  #C44020;
+    --amber:    #D4861A;
+    --amber-lt: #F0B040;
+    --sand:     #F2E8D4;
+    --sand-lt:  #FAF5EC;
+    --sage:     #3B4A2F;
+    --white:    #FDFBF8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ink);
+    color: var(--sand);
+    overflow-x: hidden;
+  }
+
+  /* GRAIN OVERLAY */
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 9998;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.045'/%3E%3C/svg%3E");
+    opacity: .5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 4rem;
+    background: rgba(15,10,7,.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(212,134,26,.2);
+  }
+  .nav-back {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--amber); text-decoration: none; font-weight: 500;
+    transition: gap .2s;
+  }
+  .nav-back:hover { gap: .9rem; }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem; color: var(--sand);
+    letter-spacing: .02em;
+  }
+  .nav-logo span {
+    display: block; font-family: 'DM Sans', sans-serif;
+    font-size: .6rem; letter-spacing: .35em; text-transform: uppercase;
+    color: var(--amber); font-weight: 500;
+  }
+  .nav-cta {
+    background: var(--rust);
+    color: var(--sand);
+    padding: .65rem 1.6rem;
+    font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    font-weight: 600; text-decoration: none;
+    transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--rust-lt); }
+
+  /* ── HERO B2B ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 3rem 5rem 6rem;
+    position: relative; z-index: 2;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: rgba(212,134,26,.12);
+    border: 1px solid rgba(212,134,26,.35);
+    padding: .4rem 1rem;
+    font-size: .65rem; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--amber-lt); font-weight: 500;
+    margin-bottom: 2rem; width: fit-content;
+  }
+  .hero-tag-dot { width: 6px; height: 6px; background: var(--amber); border-radius: 50%; animation: blink 1.8s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 7vw, 7.5rem);
+    line-height: .95;
+    letter-spacing: .02em;
+    color: var(--sand-lt);
+    margin-bottom: 1.8rem;
+  }
+  .hero-title .accent { color: var(--amber); display: block; }
+  .hero-title .small-line {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2.5rem);
+    font-weight: 400; font-style: italic;
+    letter-spacing: .01em; color: var(--amber-lt);
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.75;
+    color: rgba(242,232,212,.7);
+    max-width: 46ch; margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .hero-metrics {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border: 1px solid rgba(212,134,26,.2);
+    margin-bottom: 3rem;
+  }
+  .metric {
+    padding: 1.4rem 1.6rem;
+    border-right: 1px solid rgba(212,134,26,.2);
+    position: relative;
+  }
+  .metric:last-child { border-right: none; }
+  .metric-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.6rem; color: var(--amber);
+    line-height: 1;
+  }
+  .metric-label {
+    font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(242,232,212,.5); margin-top: .3rem; font-weight: 500;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn-main {
+    background: var(--rust);
+    color: var(--sand);
+    padding: 1.1rem 2.5rem;
+    font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600;
+    text-decoration: none; display: inline-block;
+    transition: background .2s, transform .2s;
+  }
+  .btn-main:hover { background: var(--rust-lt); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid rgba(212,134,26,.5);
+    color: var(--amber-lt);
+    padding: 1.1rem 2.2rem;
+    font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+    text-decoration: none; display: inline-block;
+    transition: border-color .2s, color .2s;
+  }
+  .btn-outline:hover { border-color: var(--amber); color: var(--amber); }
+
+  /* Hero right - mosaic photos */
+  .hero-right {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3px;
+    padding: 5.5rem 4rem 4rem 1rem;
+  }
+  .hero-photo {
+    overflow: hidden; position: relative;
+  }
+  .hero-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+    transition: transform .7s cubic-bezier(.25,.46,.45,.94);
+    filter: brightness(.85) saturate(1.1);
+  }
+  .hero-photo:hover img { transform: scale(1.06); filter: brightness(.95) saturate(1.2); }
+  .hero-photo-main {
+    grid-column: 1/2; grid-row: 1/3;
+  }
+  .hero-photo-main img { height: 100%; }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    background: var(--amber);
+    padding: .75rem 0; overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .marquee-track {
+    display: flex; gap: 4rem;
+    animation: marquee 22s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem; letter-spacing: .18em;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .marquee-item::after { content: '◆'; font-size: .5rem; }
+
+  /* ── CATÁLOGO ── */
+  .catalogo {
+    padding: 7rem 6rem;
+    background: var(--ink-mid);
+  }
+  .sec-label {
+    font-size: .65rem; letter-spacing: .4em; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 1rem; font-weight: 500;
+  }
+  .sec-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    line-height: 1.1; color: var(--sand-lt);
+    margin-bottom: .6rem;
+  }
+  .sec-title em { font-style: italic; color: var(--amber-lt); }
+  .sec-sub {
+    font-size: 1rem; color: rgba(242,232,212,.6);
+    margin-bottom: 4rem; max-width: 55ch; font-weight: 300; line-height: 1.7;
+  }
+
+  .products-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .prod-card {
+    background: var(--ink);
+    position: relative; overflow: hidden;
+    cursor: pointer;
+  }
+  .prod-card-img {
+    height: 300px; overflow: hidden; position: relative;
+  }
+  .prod-card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+    transition: transform .6s ease;
+    filter: brightness(.8);
+  }
+  .prod-card:hover .prod-card-img img { transform: scale(1.07); filter: brightness(.95); }
+  .prod-card-body {
+    padding: 1.8rem 2rem;
+    border-bottom: 1px solid rgba(212,134,26,.12);
+  }
+  .prod-card-tag {
+    font-size: .62rem; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--amber); margin-bottom: .6rem; font-weight: 500;
+  }
+  .prod-card-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem; color: var(--sand-lt); margin-bottom: .5rem;
+  }
+  .prod-card-desc {
+    font-size: .85rem; line-height: 1.65;
+    color: rgba(242,232,212,.55); font-weight: 300;
+  }
+  .prod-card-specs {
+    padding: 1.2rem 2rem;
+    display: flex; gap: 2rem;
+  }
+  .spec { }
+  .spec-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem; color: var(--amber);
+    line-height: 1;
+  }
+  .spec-key {
+    font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+    color: rgba(242,232,212,.4); margin-top: .15rem;
+  }
+
+  /* FEATURED WIDE CARD */
+  .prod-card-wide {
+    grid-column: 1 / -1;
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: #140C06;
+  }
+  .prod-card-wide .prod-card-img { height: 380px; }
+  .prod-card-wide .prod-card-content {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 3rem 4rem;
+  }
+
+  /* ── CAPACIDAD / LOGÍSTICA ── */
+  .logistica {
+    padding: 7rem 6rem;
+    background: var(--ink);
+    position: relative; overflow: hidden;
+  }
+  .logistica::before {
+    content: 'VOLUMEN';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18rem; color: var(--amber);
+    opacity: .025; line-height: 1;
+    bottom: -3rem; right: -3rem;
+    pointer-events: none; user-select: none;
+    white-space: nowrap;
+  }
+  .logistica-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    max-width: 1200px; margin: 0 auto; align-items: center;
+  }
+  .logistica-photos {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+    position: relative;
+  }
+  .logistica-photos img {
+    width: 100%; height: 260px; object-fit: cover;
+    display: block; filter: brightness(.75) saturate(.9);
+    transition: filter .3s;
+  }
+  .logistica-photos img:hover { filter: brightness(.9) saturate(1.1); }
+  .logistica-photos img:first-child {
+    grid-column: 1/-1; height: 220px;
+  }
+  .logistica-features {
+    display: flex; flex-direction: column; gap: 2rem;
+    margin-top: 3rem;
+  }
+  .feat-item {
+    display: grid; grid-template-columns: 48px 1fr;
+    gap: 1.2rem; align-items: start;
+  }
+  .feat-icon {
+    width: 48px; height: 48px;
+    border: 1px solid rgba(212,134,26,.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+  }
+  .feat-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--sand-lt); margin-bottom: .3rem;
+  }
+  .feat-text {
+    font-size: .85rem; line-height: 1.6;
+    color: rgba(242,232,212,.55); font-weight: 300;
+  }
+
+  /* ── FORMULARIO ── */
+  .contacto-b2b {
+    padding: 7rem 6rem;
+    background: var(--ink-mid);
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem;
+    align-items: start;
+    max-width: 100%;
+  }
+  .form-eyebrow {
+    font-size: .65rem; letter-spacing: .35em; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 1rem; font-weight: 500;
+  }
+  .form-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    color: var(--sand-lt); margin-bottom: 1rem; line-height: 1.1;
+  }
+  .form-title em { font-style: italic; color: var(--amber-lt); }
+  .form-desc {
+    font-size: .95rem; line-height: 1.75;
+    color: rgba(242,232,212,.6); font-weight: 300;
+    margin-bottom: 3rem;
+  }
+  .contact-blocks { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-block {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.4rem; border: 1px solid rgba(212,134,26,.15);
+    transition: border-color .2s;
+  }
+  .contact-block:hover { border-color: rgba(212,134,26,.4); }
+  .contact-block-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .contact-block-label {
+    font-size: .62rem; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--amber); font-weight: 500; margin-bottom: .3rem;
+  }
+  .contact-block-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem; color: var(--sand-lt);
+  }
+  .contact-block-val a { color: inherit; text-decoration: none; transition: color .2s; }
+  .contact-block-val a:hover { color: var(--amber-lt); }
+  .contact-block-sub {
+    font-size: .8rem; color: rgba(242,232,212,.45);
+    margin-top: .15rem; line-height: 1.5; font-weight: 300;
+  }
+
+  /* Form right */
+  .b2b-form {
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: .4rem; }
+  .form-label {
+    font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--amber); font-weight: 500;
+  }
+  .form-input, .form-select, .form-textarea {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(212,134,26,.2);
+    color: var(--sand-lt);
+    padding: .85rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .9rem;
+    transition: border-color .2s;
+    outline: none;
+    width: 100%;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--amber);
+  }
+  .form-select option { background: var(--ink); }
+  .form-textarea { height: 110px; resize: vertical; }
+  .form-submit {
+    background: var(--rust);
+    color: var(--sand);
+    border: none; cursor: pointer;
+    padding: 1.1rem 2.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600;
+    transition: background .2s;
+    align-self: flex-start;
+    margin-top: .5rem;
+  }
+  .form-submit:hover { background: var(--rust-lt); }
+  .form-note {
+    font-size: .75rem; color: rgba(242,232,212,.35);
+    line-height: 1.5; font-weight: 300;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #070302;
+    padding: 2.5rem 6rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(212,134,26,.15);
+  }
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--amber);
+  }
+  .footer-copy {
+    font-size: .7rem; color: rgba(242,232,212,.3); letter-spacing: .08em;
+  }
+  .footer-back {
+    font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(242,232,212,.4); text-decoration: none;
+    border-bottom: 1px solid rgba(242,232,212,.2);
+    padding-bottom: 1px;
+    transition: color .2s;
+  }
+  .footer-back:hover { color: var(--amber); }
+
+  /* ── WA ── */
+  .wa-btn {
+    position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 300;
+    background: #25D366; color: white;
+    width: 60px; height: 60px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 6px 30px rgba(37,211,102,.4);
+    animation: waPulse 2.5s infinite;
+    transition: transform .2s;
+  }
+  .wa-btn:hover { transform: scale(1.1); }
+  .wa-btn svg { width: 28px; height: 28px; }
+  @keyframes waPulse {
+    0%,100%{box-shadow:0 6px 30px rgba(37,211,102,.4)}
+    50%{box-shadow:0 6px 50px rgba(37,211,102,.7)}
+  }
+
+  /* ── FADE IN ── */
+  .fade-up { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+
+  @keyframes slideInL {
+    from{opacity:0;transform:translateX(-35px)}
+    to{opacity:1;transform:translateX(0)}
+  }
+  @keyframes slideInR {
+    from{opacity:0;transform:translateX(35px)}
+    to{opacity:1;transform:translateX(0)}
+  }
+  .hero-left{animation:slideInL .9s ease both}
+  .hero-right{animation:slideInR .9s .15s ease both}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    nav{padding:1rem 1.5rem}
+    .hero{grid-template-columns:1fr; min-height:auto}
+    .hero-left{padding:7rem 2rem 2rem}
+    .hero-right{padding:2rem; grid-template-columns:1fr 1fr; height:320px}
+    .hero-photo-main{grid-column:auto; grid-row:auto}
+    .catalogo,.logistica,.contacto-b2b{padding:4rem 2rem}
+    .products-grid{grid-template-columns:1fr}
+    .prod-card-wide{grid-template-columns:1fr}
+    .logistica-grid{grid-template-columns:1fr; gap:3rem}
+    .contacto-b2b{grid-template-columns:1fr; gap:3rem}
+    .form-row{grid-template-columns:1fr}
+    footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="solo-dulces.html" class="nav-back">← Volver al sitio</a>
+  <div class="nav-logo">Solo Dulces <span>Canal Mayorista · B2B</span></div>
+  <a href="https://wa.me/573118131000?text=Hola%2C%20soy%20proveedor%20y%20deseo%20informaci%C3%B3n%20sobre%20sus%20productos%20al%20por%20mayor" target="_blank" class="nav-cta">Cotizar Ahora</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag"><span class="hero-tag-dot"></span> Canal Mayorista &amp; Grandes Superficies</div>
+    <h1 class="hero-title">
+      <span class="small-line">El bocadillo que</span>
+      VENDE <span class="accent">SOLO.</span>
+    </h1>
+    <p class="hero-desc">Más de 40 años de trayectoria, producción constante y presentaciones diseñadas para lineal de supermercado, club de precios y distribución mayorista a nivel nacional.</p>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-num">6+</div>
+        <div class="metric-label">SKUs activos</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num">40</div>
+        <div class="metric-label">Años en el mercado</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num">INVIMA</div>
+        <div class="metric-label">Certificado RSA</div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#catalogo" class="btn-main">Ver Catálogo Mayorista</a>
+      <a href="#contacto" class="btn-outline">Solicitar Muestra</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-photo hero-photo-main">
+      <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_37_01_PM__2_.jpeg" alt="Bocadillo Solo Dulces — producción">
+    </div>
+    <div class="hero-photo">
+      <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_24_37_PM.jpeg" alt="Frascos mayoristas">
+    </div>
+    <div class="hero-photo">
+      <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_37_02_PM__3_.jpeg" alt="Empaques Dulce de Guayaba">
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Despachos a todo Colombia</span>
+    <span class="marquee-item">INVIMA RSA-J12103700</span>
+    <span class="marquee-item">Mínimo por unidad de caja</span>
+    <span class="marquee-item">Industria Colombiana · Barbosa, Santander</span>
+    <span class="marquee-item">Código de barras propio</span>
+    <span class="marquee-item">Presentaciones para lineal de super</span>
+    <span class="marquee-item">Despachos a todo Colombia</span>
+    <span class="marquee-item">INVIMA RSA-J12103700</span>
+    <span class="marquee-item">Mínimo por unidad de caja</span>
+    <span class="marquee-item">Industria Colombiana · Barbosa, Santander</span>
+    <span class="marquee-item">Código de barras propio</span>
+    <span class="marquee-item">Presentaciones para lineal de super</span>
+  </div>
+</div>
+
+<!-- CATÁLOGO -->
+<section class="catalogo" id="catalogo">
+  <p class="sec-label">Portafolio mayorista</p>
+  <h2 class="sec-title">Presentaciones <em>para cada canal</em></h2>
+  <p class="sec-sub">Desde el bocadillo tradicional envuelto en hoja hasta las lonchitas de precisión para alta cocina. Todos con código de barras y registro INVIMA activo.</p>
+
+  <div class="products-grid">
+
+    <!-- WIDE FEATURED -->
+    <div class="prod-card prod-card-wide fade-up">
+      <div class="prod-card-img">
+        <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_24_37_PM.jpeg" alt="Frasco mayorista bocadillo">
+      </div>
+      <div class="prod-card-content">
+        <p class="prod-card-tag">⭐ Bestseller Canal Mayorista</p>
+        <h3 class="prod-card-name" style="font-size:2rem; margin-bottom:.8rem;">Frasco Mayorista<br>Dulce de Guayaba</h3>
+        <p class="prod-card-desc" style="margin-bottom:1.5rem;">Presentación en frasco plástico con tapa roja. Alta visibilidad en punto de venta. Ideal para tiendas, supermercados de barrio y licorerías. Registro sanitario INVIMA activo y código de barras propio. Alta rotación garantizada.</p>
+        <div style="display:flex; gap:2rem;">
+          <div class="spec"><div class="spec-val">500g</div><div class="spec-key">Peso Neto</div></div>
+          <div class="spec"><div class="spec-val">30u</div><div class="spec-key">por caja</div></div>
+          <div class="spec"><div class="spec-val">INVIMA</div><div class="spec-key">certificado</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 1 -->
+    <div class="prod-card fade-up">
+      <div class="prod-card-img">
+        <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_24_40_PM.jpeg" alt="Bocadillo artesanal en hoja">
+      </div>
+      <div class="prod-card-body">
+        <p class="prod-card-tag">Formato Tradicional</p>
+        <h3 class="prod-card-name">Bocadillo en Hoja</h3>
+        <p class="prod-card-desc">Presentación artesanal envuelta en hoja de bijao. Alta rotación en tiendas de barrio y puntos turísticos. Referencia icónica del dulce santandereano.</p>
+      </div>
+      <div class="prod-card-specs">
+        <div class="spec"><div class="spec-val">650g</div><div class="spec-key">caja 36u</div></div>
+        <div class="spec"><div class="spec-val">1500g</div><div class="spec-key">caja 36u XL</div></div>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="prod-card fade-up">
+      <div class="prod-card-img">
+        <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_24_42_PM.jpeg" alt="Lonchitas bocadillo gourmet">
+      </div>
+      <div class="prod-card-body">
+        <p class="prod-card-tag">Canal Gourmet / Supermercado</p>
+        <h3 class="prod-card-name">Lonchitas de Bocadillo</h3>
+        <p class="prod-card-desc">Bocadillo extrafino en lonchitas empacadas al vacío. Segmento premium, ideal para superficies con sección gourmet, deli o tabla de quesos.</p>
+      </div>
+      <div class="prod-card-specs">
+        <div class="spec"><div class="spec-val">250g</div><div class="spec-key">8 porciones</div></div>
+        <div class="spec"><div class="spec-val">10u</div><div class="spec-key">por caja</div></div>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="prod-card fade-up">
+      <div class="prod-card-img">
+        <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_24_42_PM__3_.jpeg" alt="Bocadillo con oblea">
+      </div>
+      <div class="prod-card-body">
+        <p class="prod-card-tag">Formato Escolar / Impulso</p>
+        <h3 class="prod-card-name">Bocadillo con Oblea</h3>
+        <p class="prod-card-desc">Bocadillo intercalado con oblea crocante. Ideal para impulso en cajas registradoras, kioscos escolares y tiendas de conveniencia.</p>
+      </div>
+      <div class="prod-card-specs">
+        <div class="spec"><div class="spec-val">6u</div><div class="spec-key">por paquete</div></div>
+        <div class="spec"><div class="spec-val">24</div><div class="spec-key">paquetes/caja</div></div>
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="prod-card fade-up">
+      <div class="prod-card-img">
+        <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_24_42_PM__1_.jpeg" alt="Dulce de guayaba barra 480g">
+      </div>
+      <div class="prod-card-body">
+        <p class="prod-card-tag">Lineal de Supermercado</p>
+        <h3 class="prod-card-name">Barra Dulce 480g</h3>
+        <p class="prod-card-desc">Presentación en barra empacada con etiqueta frontal de alto impacto. Perfecta para estantería de supermercado. 12 porciones por barra, código de barras EAN-13.</p>
+      </div>
+      <div class="prod-card-specs">
+        <div class="spec"><div class="spec-val">480g</div><div class="spec-key">12 porciones</div></div>
+        <div class="spec"><div class="spec-val">280g</div><div class="spec-key">7 porciones</div></div>
+      </div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="prod-card fade-up">
+      <div class="prod-card-img">
+        <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_37_00_PM__1_.jpeg" alt="Ojitos de guayaba bicolor">
+      </div>
+      <div class="prod-card-body">
+        <p class="prod-card-tag">Diferenciador · Impulso</p>
+        <h3 class="prod-card-name">Ojitos Bicolor</h3>
+        <p class="prod-card-desc">Bocadillo bicolor con capa de guayaba roja y capa blanca. Alta diferenciación visual en anaquel. Formato pequeño de alto margen para reventa.</p>
+      </div>
+      <div class="prod-card-specs">
+        <div class="spec"><div class="spec-val">430g</div><div class="spec-key">25 unidades</div></div>
+        <div class="spec"><div class="spec-val">RSAJ</div><div class="spec-key">INVIMA</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LOGÍSTICA -->
+<section class="logistica">
+  <div class="logistica-grid">
+    <div>
+      <p class="sec-label">Capacidad &amp; Logística</p>
+      <h2 class="sec-title">Producción <em>para escalar</em> con usted</h2>
+      <p class="sec-sub" style="margin-bottom:2.5rem;">Nuestra planta en Barbosa, Santander opera con capacidad de producción continua para responder pedidos de grandes superficies, distribuidores regionales y plataformas de e-commerce.</p>
+      <div class="logistica-features">
+        <div class="feat-item">
+          <div class="feat-icon">🏭</div>
+          <div>
+            <div class="feat-title">Planta propia certificada</div>
+            <div class="feat-text">Instalaciones en Sector Industrial de Barbosa S., con proceso de elaboración artesanal supervisado y empaque en línea con estándares INVIMA.</div>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">📦</div>
+          <div>
+            <div class="feat-title">Pedidos mínimos flexibles</div>
+            <div class="feat-text">Adaptamos el MOQ a su canal: desde cajas individuales para tienda especializada hasta pallets completos para grandes superficies y centrales de distribución.</div>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">🚛</div>
+          <div>
+            <div class="feat-title">Despacho a todo Colombia</div>
+            <div class="feat-text">Coordinamos despachos con transportistas aliados hacia Bogotá, Medellín, Cali, Bucaramanga y toda la red nacional. Tiempos de entrega acordados por pedido.</div>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">🏷️</div>
+          <div>
+            <div class="feat-title">Etiquetado y código de barras propio</div>
+            <div class="feat-text">Todos los productos cuentan con EAN-13, información nutricional completa, registro INVIMA y advertencia Minsalud actualizados para cumplimiento normativo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="logistica-photos fade-up">
+        <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_37_01_PM.jpeg" alt="Stock de producto en planta">
+        <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_24_43_PM.jpeg" alt="Frasco bocadillo mayorista">
+        <img src="/mnt/user-data/uploads/WhatsApp_Image_2026-03-20_at_4_36_59_PM.jpeg" alt="Cajas listas para despacho">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO B2B -->
+<section class="contacto-b2b" id="contacto">
+  <div>
+    <p class="form-eyebrow">Hablemos de negocios</p>
+    <h2 class="form-title">¿Su empresa quiere <em>vender Solo Dulces</em>?</h2>
+    <p class="form-desc">Contáctenos directamente. Respondemos a distribuidores, supermercados, clubes de precio, tiendas online y cualquier canal interesado en nuestros productos.</p>
+    <div class="contact-blocks">
+      <div class="contact-block">
+        <div class="contact-block-icon">📱</div>
+        <div>
+          <div class="contact-block-label">WhatsApp Comercial</div>
+          <div class="contact-block-val"><a href="https://wa.me/573118131000?text=Hola%2C%20soy%20proveedor%20y%20deseo%20informaci%C3%B3n%20sobre%20sus%20productos%20al%20por%20mayor" target="_blank">+57 311 813 1000</a></div>
+          <div class="contact-block-sub">Atención directa con la fábrica</div>
+        </div>
+      </div>
+      <div class="contact-block">
+        <div class="contact-block-icon">📞</div>
+        <div>
+          <div class="contact-block-label">Teléfono Alterno</div>
+          <div class="contact-block-val"><a href="tel:+573102366412">+57 310 236 6412</a></div>
+          <div class="contact-block-sub">Horario comercial L–S 7am–5pm</div>
+        </div>
+      </div>
+      <div class="contact-block">
+        <div class="contact-block-icon">✉️</div>
+        <div>
+          <div class="contact-block-label">Correo Electrónico</div>
+          <div class="contact-block-val"><a href="mailto:solodulcesmanjaresbarbosa@gmail.com">solodulcesmanjaresbarbosa<br>@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="contact-block">
+        <div class="contact-block-icon">📍</div>
+        <div>
+          <div class="contact-block-label">Planta de producción</div>
+          <div class="contact-block-val">Tranv. 3 No 7-107</div>
+          <div class="contact-block-sub">Sector Industrial · Barbosa, Santander<br>Industria Colombiana</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div>
+    <form class="b2b-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Nombre completo *</label>
+          <input type="text" class="form-input" placeholder="Ej: Carlos Mendoza" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Empresa / Razón social *</label>
+          <input type="text" class="form-input" placeholder="Ej: Éxito S.A." required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">WhatsApp / Teléfono *</label>
+          <input type="tel" class="form-input" placeholder="+57 300 000 0000" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ciudad</label>
+          <input type="text" class="form-input" placeholder="Bogotá, Medellín...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tipo de canal *</label>
+        <select class="form-select" required>
+          <option value="" disabled selected>Seleccione su canal de distribución</option>
+          <option>Supermercado / Grande Superficie</option>
+          <option>Distribuidor Regional</option>
+          <option>Tienda Especializada / Gourmet</option>
+          <option>Club de Precios (Costco, PriceSmart, etc.)</option>
+          <option>E-commerce / Marketplace</option>
+          <option>Horeca (Restaurantes, Hoteles)</option>
+          <option>Tienda de Barrio / TAT</option>
+          <option>Exportación</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Productos de interés</label>
+        <select class="form-select">
+          <option value="" disabled selected>¿Qué presentaciones le interesan?</option>
+          <option>Bocadillo en hoja (caja 36u)</option>
+          <option>Frasco mayorista 500g</option>
+          <option>Lonchitas gourmet 250g</option>
+          <option>Barra 480g / 280g (lineal super)</option>
+          <option>Ojitos bicolor 430g</option>
+          <option>Bocadillo con oblea</option>
+          <option>Portafolio completo</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mensaje / Volumen estimado</label>
+        <textarea class="form-textarea" placeholder="Cuéntenos sobre su empresa, volumen mensual estimado o cualquier pregunta sobre condiciones comerciales..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Enviar Solicitud por WhatsApp →</button>
+      <p class="form-note">Al enviar, se abrirá WhatsApp con su información para que nuestro equipo comercial le responda directamente.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Solo Dulces · Manjares Barboseños</div>
+  <p class="footer-copy">© 2024 Solo Dulces y Manjares Barboseños · INVIMA NSA-0010636-2021 · Barbosa, Santander</p>
+  <a href="solo-dulces.html" class="footer-back">← Sitio Principal</a>
+</footer>
+
+<!-- WA FLOAT -->
+<a class="wa-btn" href="https://wa.me/573118131000?text=Hola%2C%20soy%20proveedor%20y%20deseo%20informaci%C3%B3n%20sobre%20sus%20productos%20al%20por%20mayor" target="_blank" aria-label="WhatsApp Mayorista">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.52 5.847L.057 23.882l6.204-1.628A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.96 0-3.793-.535-5.362-1.464l-.383-.228-3.684.966.983-3.596-.249-.4A9.937 9.937 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/>
+  </svg>
+</a>
+
+<script>
+  // Fade-up scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:.12});
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // Form → WhatsApp
+  function handleSubmit(e) {
+    e.preventDefault();
+    const f = e.target;
+    const nombre   = f.querySelectorAll('input')[0].value;
+    const empresa  = f.querySelectorAll('input')[1].value;
+    const tel      = f.querySelectorAll('input')[2].value;
+    const ciudad   = f.querySelectorAll('input')[3].value;
+    const canal    = f.querySelectorAll('select')[0].value;
+    const producto = f.querySelectorAll('select')[1].value;
+    const mensaje  = f.querySelector('textarea').value;
+
+    const txt = `Hola, soy proveedor interesado en Solo Dulces:\n\n👤 ${nombre}\n🏢 ${empresa}\n📞 ${tel}\n📍 ${ciudad}\n🛒 Canal: ${canal}\n📦 Productos: ${producto}\n\n💬 ${mensaje}`;
+    window.open(`https://wa.me/573118131000?text=${encodeURIComponent(txt)}`, '_blank');
+  }
+</script>
+</body>
+</html>
